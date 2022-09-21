@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const notesRoutes = require("./routes/notes");
 
 // express app
@@ -9,10 +10,10 @@ const app = express();
 
 // middleware
 app.use(express.json());
+app.use(cors({ origin: process.env.APP_URI }));
 
 app.use((req, res, next) => {
   console.log(req.path, req.method);
-  //res.header("Access-Control-Allow-Origin", "*");
   next();
 });
 
